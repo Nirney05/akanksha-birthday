@@ -1,0 +1,505 @@
+<!-- Save this as index.html -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Happy Birthday, Akanksha — A Cinematic Love Journey 💖</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Dancing+Script:wght@500;700&display=swap" rel="stylesheet">
+
+  <!-- Swiper CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/swiper@9/swiper-bundle.min.css" />
+
+  <style>
+    /* ---------------- Reset ---------------- */
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{
+      font-family:"Poppins",system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+      background: linear-gradient(180deg,#fff8fb 0%, #ffffff 40%, #fbfbff 100%);
+      color:#222; overflow-x:hidden; -webkit-font-smoothing:antialiased;
+      -webkit-font-feature-settings: "liga" 1;
+    }
+
+    /* ---------- Header ---------- */
+    header{
+      position:fixed;left:0;right:0;top:0;height:72px;padding:10px 28px;display:flex;align-items:center;justify-content:space-between;z-index:140;
+      background:linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.72));
+      box-shadow:0 6px 18px rgba(100,50,100,0.05);backdrop-filter: blur(6px);
+      transition: all .35s ease;
+    }
+    header.scrolled { height:60px; box-shadow:0 12px 40px rgba(255,79,163,0.12); }
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:50px;height:50px;border-radius:14px;background:linear-gradient(135deg,#ffc6e6,#ffdff3);display:flex;align-items:center;justify-content:center;font-family:"Dancing Script";font-size:20px;color:#fff;box-shadow:0 12px 28px rgba(255,107,179,0.12)}
+    nav a{margin-left:14px;color:#333;text-decoration:none;font-weight:600;opacity:.95}
+    nav a:hover{color:#ff4fa3}
+
+    main{padding-top:96px;max-width:1200px;margin:0 auto;padding-bottom:120px;position:relative;z-index:10}
+
+    /* ---------- Fullscreen particles canvas ---------- */
+    #particles-canvas{position:fixed;inset:0;z-index:0;pointer-events:none}
+
+    /* ---------- Hero ---------- */
+    .hero{
+      min-height:92vh;border-radius:18px;padding:36px;display:flex;gap:28px;align-items:center;position:relative;overflow:hidden;margin:18px 20px 0 20px;
+      background: linear-gradient(135deg,#fff0f8 0%, #ffffff 45%, #f6fbff 100%);
+      box-shadow: 0 30px 80px rgba(255,105,170,0.06);
+      isolation:isolate;
+    }
+    .hero-left{flex:1;padding:8px 12px;z-index:20}
+    .hero-title{font-family:"Dancing Script";font-size:64px;color:#ff4fa3;line-height:1;margin-bottom:8px}
+    .hero-sub{color:#6b6b7a;margin-top:8px;font-size:18px}
+    .hero-cta{margin-top:18px;display:flex;gap:12px;flex-wrap:wrap}
+    .btn{
+      padding:12px 18px;border-radius:14px;background:linear-gradient(90deg,#ff6fb1,#ff3f8f);color:#fff;border:none;font-weight:700;cursor:pointer;box-shadow:0 16px 40px rgba(255,79,163,0.16);
+      transition:transform .25s ease, box-shadow .25s ease;
+    }
+    .btn:hover{transform:translateY(-6px);box-shadow:0 24px 60px rgba(255,79,163,0.22)}
+    .btn-ghost{background:transparent;border:2px solid rgba(0,0,0,0.06);padding:10px 14px;border-radius:12px}
+
+    .hero-right{width:420px;border-radius:16px;padding:18px;display:flex;flex-direction:column;gap:12px;align-items:center;justify-content:center;background:linear-gradient(180deg,#fff,#fff9fb);box-shadow:0 20px 60px rgba(255,105,170,0.05);z-index:20}
+
+    /* ---------- Typed message block ---------- */
+    .typed-wrap{font-size:18px;color:#444;line-height:1.7;max-width:900px}
+
+    /* ---------- Sections ---------- */
+    section.card{margin:28px 20px;padding:26px;border-radius:16px;background:linear-gradient(180deg,#ffffff,#fff9fb);box-shadow:0 18px 50px rgba(30,20,40,0.04);position:relative;z-index:20}
+
+    /* Timeline */
+    .timeline { display:flex;flex-direction:column;gap:18px;margin-top:14px }
+    .timeline .step {
+      display:grid;grid-template-columns:120px 1fr;gap:18px;padding:18px;border-radius:12px;background:linear-gradient(180deg,#fff,#fffefc);box-shadow:0 10px 30px rgba(15,15,15,0.03);
+      position:relative;overflow:hidden;
+    }
+    .timeline .date{font-weight:700;color:#6b6b7a}
+    .timeline .desc{font-size:15px;color:#333}
+
+    /* parallax row */
+    .parallax-row{display:flex;gap:12px;align-items:center;overflow:hidden;margin-top:14px}
+    .parallax-row img{width:100%;height:220px;object-fit:cover;border-radius:12px;flex:1}
+
+    /* gallery + swiper */
+    .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+    @media (max-width:980px){ .gallery{grid-template-columns:repeat(2,1fr)} }
+    @media (max-width:600px){ .gallery{grid-template-columns:repeat(1,1fr)} }
+    .gallery img{width:100%;height:220px;object-fit:cover;border-radius:12px;cursor:pointer;transition:transform .25s,box-shadow .25s}
+    .gallery img:hover{transform:translateY(-6px);box-shadow:0 24px 60px rgba(200,90,150,0.08)}
+
+    .slideshow{margin-top:12px;border-radius:12px;overflow:hidden}
+    .swiper{width:100%;height:420px}
+
+    /* video thumb */
+    .video-thumb{position:relative;border-radius:12px;overflow:hidden;cursor:pointer}
+    .play-btn{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:90px;height:90px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,#ff6fb1,#ff3f8f);box-shadow:0 20px 50px rgba(255,79,163,0.16);color:#fff;font-size:18px;font-weight:800}
+
+    /* final */
+    .final{display:flex;flex-direction:column;align-items:center;gap:18px;padding:40px 20px;border-radius:16px;background:linear-gradient(180deg,#fff7fb,#fff3f8);text-align:center;position:relative;overflow:hidden}
+    .neon{font-family:"Dancing Script";font-size:46px;color:#ff4fa3;text-shadow:0 6px 30px rgba(255,79,163,0.28);animation: neonPulse 2s infinite alternate}
+    @keyframes neonPulse { from { text-shadow: 0 0 10px #ff4fa3 } to { text-shadow: 0 0 30px #ff4fa3 } }
+
+    /* floating hearts */
+    .floating-heart { position: fixed; pointer-events: none; z-index: 9999; font-size: 28px; animation: floatUp 3s linear forwards; }
+    @keyframes floatUp { 0%{ transform: translateY(0) } 100%{ transform: translateY(-110vh) rotate(360deg); opacity:0 } }
+
+    /* cursor (subtle) */
+    .cursor { position: fixed; width: 18px; height: 18px; border-radius: 50%; background: rgba(255,79,163,0.35); pointer-events: none; z-index:9999; transform:translate(-50%,-50%); transition: transform .12s linear; mix-blend-mode: difference; }
+    .cursor-follower { position: fixed; width: 36px; height: 36px; border-radius: 50%; border:1px solid rgba(255,79,163,0.25); pointer-events:none; z-index:9998; transform:translate(-50%,-50%); transition: transform .28s linear; }
+
+    footer{padding:18px;text-align:center;color:#7b7b86;margin-top:22px}
+
+    @media (max-width:900px){
+      .hero{flex-direction:column;padding:22px}
+      .hero-right{width:100%}
+      .timeline .step{grid-template-columns:1fr}
+      .hero-title{font-size:44px}
+      .neon{font-size:34px}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Custom small cursor -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-follower" id="cursorFollower"></div>
+
+  <!-- Header -->
+  <header id="header">
+    <div class="brand">
+      <div class="logo">A💖</div>
+      <div>
+        <div style="font-weight:700">Happy Birthday, <span style="color:#ff4fa3">Akanksha</span></div>
+        <div style="font-size:12px;color:#7a7a86">A cinematic surprise made with love</div>
+      </div>
+    </div>
+
+    <nav>
+      <a href="#hero" data-scroll>Home</a>
+      <a href="#message" data-scroll>Message</a>
+      <a href="#story" data-scroll>Our Story</a>
+      <a href="#gallery" data-scroll>Photos</a>
+      <a href="#video" data-scroll>Video</a>
+      <a href="#final" data-scroll>Forever</a>
+    </nav>
+  </header>
+
+  <!-- particles canvas -->
+  <canvas id="particles-canvas"></canvas>
+
+  <main>
+    <!-- HERO -->
+    <section id="hero" class="hero" aria-label="Hero">
+      <div class="hero-left">
+        <div class="hero-title" id="heroTitle">Happy Birthday, Akanksha</div>
+        <div class="hero-sub">Soft pastels, floating hearts, and a journey of memories — this is all for you.</div>
+        <div class="hero-cta">
+          <button class="btn" id="startJourney">Start the journey ✨</button>
+          <button class="btn-ghost" id="playPauseMusic">Play music</button>
+          <div style="display:flex;align-items:center;gap:8px">
+            <div style="font-weight:700">Born:</div>
+            <div style="color:#ff4fa3;font-weight:800">1 Nov</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <img src="images/IMG_1155.jpeg" alt="cover" style="width:100%;height:260px;object-fit:cover;border-radius:12px;box-shadow:0 30px 70px rgba(255,102,160,0.08)">
+        <div style="font-weight:700">To my dearest <span style="color:#ff4fa3">Akanksha</span></div>
+        <div style="font-size:13px;color:#7a7a86">From: Nirney</div>
+      </div>
+    </section>
+
+    <!-- PERSONAL MESSAGE -->
+    <section id="message" class="card" aria-label="Personal message">
+      <h2 style="font-family:'Dancing Script';font-size:32px;color:#ff4fa3">My heart, my words</h2>
+      <div style="display:flex;gap:18px;align-items:flex-start;flex-wrap:wrap;margin-top:12px">
+        <div class="typed-wrap" style="flex:1;min-width:260px">
+          <div id="typed-message"></div>
+        </div>
+        <div style="width:320px;min-width:220px">
+          <div style="background:linear-gradient(180deg,#fff,#fff9fb);padding:12px;border-radius:12px;box-shadow:0 14px 40px rgba(230,120,180,0.06)">
+            <div style="font-weight:700">Birthday</div>
+            <div style="margin-top:6px;color:#7a7a86">1 Nov</div>
+            <div style="margin-top:12px"><div style="display:inline-block;padding:8px 12px;border-radius:999px;background:rgba(255,79,163,0.08);color:#ff4fa3;font-weight:700">Always & forever</div></div>
+            <div style="margin-top:12px;color:#7a7a86;font-size:13px">Tip: Click anywhere to leave a tiny heart ✨</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- OUR LOVE STORY -->
+    <section id="story" class="card" aria-label="Our Love Story">
+      <h3 style="font-family:'Dancing Script';font-size:26px;color:#ff4fa3">Our Love Story — the moments</h3>
+
+      <div class="timeline">
+        <div class="step">
+          <div class="date">25 Jan 2025</div>
+          <div class="desc"><strong>You DM'ed her:</strong> "Hey, I came across your profile and I must say your vibe is amazing — how's your day going?" She replied and you started talking.</div>
+        </div>
+
+        <div class="step">
+          <div class="date">29 Jan 2025</div>
+          <div class="desc">You kept talking and connecting — the start of something beautiful.</div>
+        </div>
+
+        <div class="step">
+          <div class="date">25 Feb 2025 — First Date</div>
+          <div class="desc">The date was unforgettable — you talked for hours and had so much fun together.</div>
+        </div>
+
+        <div class="step">
+          <div class="date">3 Mar 2025 — Official</div>
+          <div class="desc">You started dating officially, enjoyed college fests, music, and long walks. Dates at <strong>Romeo Juliet Cafe</strong>, <strong>MKT</strong>, <strong>Hauz Khas</strong> and KFC are treasured memories.</div>
+        </div>
+
+        <div class="step">
+          <div class="date">Summer Days</div>
+          <div class="desc">Vacation dates, food adventures and quiet talks — now almost 9 months together and every day shines brighter because of you.</div>
+        </div>
+      </div>
+
+      <!-- Parallax row -->
+      <div class="parallax-row" aria-hidden="true">
+        <img src="images/IMG_3734.jpeg" alt="p1" data-speed="0.3">
+        <img src="images/IMG_2847.jpg" alt="p2" data-speed="0.2">
+        <img src="images/IMG_1736.jpeg" alt="p3" data-speed="0.1">
+      </div>
+    </section>
+
+    <!-- PHOTOS -->
+    <section id="gallery" class="card" aria-label="Photos">
+      <h3 style="font-family:'Dancing Script';font-size:24px;color:#ff4fa3">Memories — photos & moments</h3>
+
+      <div class="slideshow" style="margin-top:14px">
+        <div class="swiper mySwiper">
+          <div class="swiper-wrapper">
+            <!-- replace with optimized images -->
+            <div class="swiper-slide"><img src="images/IMG_1154.jpg" alt="slide1" style="width:100%;height:100%;object-fit:cover"></div>
+            <div class="swiper-slide"><img src="images/IMG_1525.jpg" alt="slide2" style="width:100%;height:100%;object-fit:cover"></div>
+            <div class="swiper-slide"><img src="images/IMG_1807.jpg" alt="slide3" style="width:100%;height:100%;object-fit:cover"></div>
+          </div>
+          <div class="swiper-pagination"></div>
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+        </div>
+      </div>
+
+      <div class="gallery" id="photoGrid" style="margin-top:14px">
+        <img src="images/IMG_1934.GIF" alt="g1" loading="lazy" data-full="images/photo1.jpg">
+        <img src="images/IMG_2067.jpg" alt="g2" loading="lazy" data-full="images/photo2.jpg">
+        <img src="images/IMG_2073.jpg" alt="g3" loading="lazy" data-full="images/photo3.jpg">
+        <img src="images/IMG_2085.jpg" alt="g4" loading="lazy" data-full="images/photo4.jpg">
+        <img src="images/IMG_2099.jpg" alt="g5" loading="lazy" data-full="images/photo5.jpg">
+        <img src="images/IMG_2847.jpg" alt="g6" loading="lazy" data-full="images/photo6.jpg">
+      </div>
+    </section>
+
+ <!-- VIDEO -->
+<section id="video" class="card" aria-label="Video" style="text-align:center;">
+  <h3 style="font-family:'Dancing Script';font-size:24px;color:#ff4fa3;">
+    A little surprise video 🎬
+  </h3>
+  <p style="color:#7a7a86;">
+    My little birthday message for you 💖
+  </p>
+
+  <div style="margin-top:20px;display:flex;justify-content:center;">
+    <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/PTVWESPKyNE?autoplay=0&rel=0&modestbranding=1"
+      title="Birthday Video for Akanksha"
+      style="border:none;border-radius:16px;box-shadow:0 8px 30px rgba(255,182,193,0.5);"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+    </iframe>
+  </div>
+</section>
+
+
+<!-- YouTube Modal -->
+<div class="modal" id="videoModal"
+     style="position:fixed;inset:0;display:flex;align-items:center;justify-content:center;
+            background:rgba(0,0,0,0.6);z-index:220;opacity:0;pointer-events:none;
+            transition:opacity .25s ease;">
+  <div class="wrap"
+       style="width:90%;max-width:920px;background:#000;border-radius:12px;padding:8px;
+              box-shadow:0 40px 120px rgba(0,0,0,0.7);transform:scale(.92);transition:transform .3s ease;">
+    <iframe id="youtubeFrame" width="100%" height="480" style="border:none;border-radius:8px"
+      src="" title="Birthday Video"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen></iframe>
+  </div>
+</div>
+
+
+    <!-- FINAL -->
+    <section id="final" class="card final" aria-label="Final">
+      <div class="neon">Forever Yours — Happy Birthday 🎂</div>
+      <div style="max-width:800px;color:#444;font-size:18px;line-height:1.6">
+        Akanksha — thank you for loving me, supporting me, and making ordinary days magical. I am grateful for every moment we share. Here's to today, to us, and to a future full of laughter, travel, food, and endless hugs. I love you so much.
+      </div>
+
+      <button class="btn" id="finalConfetti" style="margin-top:14px">Celebrate 🎉</button>
+    </section>
+
+    <footer>Built with ❤️ for <strong>Akanksha</strong> — Made by Nirney.</footer>
+  </main>
+
+  <!-- Lightbox modal for images -->
+  <div id="lightboxModal" style="position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.8);z-index:250;opacity:0;pointer-events:none;transition:opacity .2s">
+    <img id="lightboxImg" src="" style="max-width:94%;max-height:86%;border-radius:12px;box-shadow:0 40px 120px rgba(0,0,0,0.7)">
+  </div>
+
+  <!-- background audio -->
+  <audio id="bgAudio" loop preload="none">
+    <source src="happy-bday.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- ===== CDN SCRIPTS ===== -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles-engine@3/tsparticles.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script src="https://unpkg.com/swiper@9/swiper-bundle.min.js"></script>
+
+  <script>
+    /* =========================
+       Initialization & helpers
+       ========================= */
+
+    // --- Typed personal message (embedded message from earlier) ---
+    const personalMessage = `My dearest Akanksha, I love you more than words can say. You are my light, my comfort, and my greatest support. On this special day — 1 Nov — I want you to know how deeply grateful I am for you. You love me, help me, and take care of me in ways I never could have imagined. Your kindness, laughter, and warmth make every day better. Thank you for being by my side; for encouraging me, believing in me, and loving me unconditionally. I promise to cherish you and make you smile every single day. Happy birthday, baby — I love you so much.`;
+    new Typed('#typed-message', { strings: [personalMessage], typeSpeed: 26, showCursor: false });
+
+    // --- GSAP + ScrollTrigger ---
+    gsap.registerPlugin(ScrollTrigger);
+
+    // hero title reveal
+    gsap.from("#heroTitle", { y: 30, opacity: 0, duration: 1.1, ease: "power2.out" });
+
+    // floating effect for hero cover image
+    gsap.to(".hero-right img", { y: -20, duration: 5, repeat: -1, yoyo: true, ease: "sine.inOut" });
+
+    // timeline reveal
+    gsap.utils.toArray('.timeline .step').forEach((el, i) => {
+      gsap.from(el, {
+        opacity: 0, y: 40, duration: .9, delay: i*0.1,
+        scrollTrigger: { trigger: el, start: "top 85%", toggleActions: "play none none none" }
+      });
+    });
+
+    // parallax images
+    document.querySelectorAll('.parallax-row img').forEach(img => {
+      const speed = parseFloat(img.dataset.speed || 0.2);
+      gsap.to(img, {
+        y: () => (200 * speed),
+        ease: "none",
+        scrollTrigger: { trigger: img, scrub: 0.7, start: "top bottom", end: "bottom top" }
+      });
+    });
+
+    // header shrink on scroll
+    gsap.to("#header", {
+      scrollTrigger: { trigger: document.body, start: "80 top", toggleClass: {target: "#header", className: "scrolled"} }
+    });
+
+    // smooth reveal for cards
+    gsap.utils.toArray('section.card').forEach( card => {
+      gsap.from(card, {opacity:0, y:30, duration:.9, scrollTrigger:{trigger:card, start:"top 90%", toggleActions:"play none none none"}});
+    });
+
+    // --- tsParticles floating hearts background ---
+    (async () => {
+      const { tsParticles } = window;
+      await tsParticles.load("particles-canvas", {
+        fullScreen: { enable: true, zIndex: 0 },
+        particles: {
+          number: { value: 40, density: { enable: true, area: 900 } },
+          shape: { type: "images", options: {
+            images: [
+              { src: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 29'><path fill='%23ff9ec5' d='M23.6 0C21.2 0 19.1 1.3 18 3.3 16.9 1.3 14.8 0 12.4 0 7.6 0 4 3.9 4 8.6 4 14.4 12.8 19.3 16 23.4c3.2-4.1 12-9 12-14.8C28 3.9 24.4 0 19.6 0z'/></svg>" , width: 32, height: 29},
+              { src: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><circle cx='12' cy='12' r='10' fill='%23ffd6ea'/></svg>", width: 24, height: 24 }
+            ]
+          }},
+          size: { value: { min: 6, max: 18 } },
+          move: { enable: true, speed: 0.6, direction: "bottom", outModes: "out" },
+          opacity: { value: { min: 0.6, max: 0.95 } }
+        },
+        detectRetina: true
+      });
+    })();
+
+    // --- Swiper 3D carousel ---
+    const swiper = new Swiper('.mySwiper', {
+      loop: true,
+      autoplay: { delay: 3500, disableOnInteraction: false },
+      effect: 'coverflow',
+      grabCursor: true,
+      centeredSlides: true,
+      slidesPerView: 'auto',
+      coverflowEffect: { rotate: 20, stretch: 0, depth: 200, modifier: 1, slideShadows: false },
+      pagination: { el: '.swiper-pagination', clickable: true },
+      navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' }
+    });
+
+    // --- Gallery lightbox ---
+    const photoGrid = document.getElementById('photoGrid');
+    const lbModal = document.getElementById('lightboxModal');
+    const lbImg = document.getElementById('lightboxImg');
+
+    photoGrid.querySelectorAll('img').forEach(img => {
+      img.addEventListener('click', () => {
+        const full = img.dataset.full || img.src;
+        lbImg.src = full;
+        lbModal.style.opacity = 1; lbModal.style.pointerEvents = 'auto';
+        confettiSmall();
+      });
+    });
+    lbModal.addEventListener('click', () => {
+      lbModal.style.opacity = 0; lbModal.style.pointerEvents = 'none'; lbImg.src = '';
+    });
+
+    // --- Video modal ---
+    const videoThumb = document.getElementById('videoThumb');
+    const videoModal = document.getElementById('videoModal');
+    const modalVideoWrap = document.querySelector('#videoModal .wrap');
+    const modalVideo = document.getElementById('modalVideo');
+
+    videoThumb.addEventListener('click', () => {
+      videoModal.style.opacity = 1; videoModal.style.pointerEvents = 'auto'; modalVideoWrap.style.transform = 'scale(1)';
+      modalVideo.play().catch(()=>{});
+      confettiSmall();
+    });
+    videoModal.addEventListener('click', (e) => {
+      if (e.target === videoModal) {
+        modalVideo.pause(); modalVideo.currentTime = 0;
+        videoModal.style.opacity = 0; videoModal.style.pointerEvents = 'none'; modalVideoWrap.style.transform = 'scale(.92)';
+      }
+    });
+
+    // --- Background music control ---
+    const bgAudio = document.getElementById('bgAudio');
+    const playPauseBtn = document.getElementById('playPauseMusic');
+    let musicPlaying = false;
+    playPauseBtn.addEventListener('click', async () => {
+      try {
+        if (!musicPlaying) { await bgAudio.play(); playPauseBtn.innerText = 'Pause music'; musicPlaying = true; }
+        else { bgAudio.pause(); playPauseBtn.innerText = 'Play music'; musicPlaying = false; }
+      } catch (e) { playPauseBtn.innerText = 'Click to allow music'; }
+    });
+
+    // Autoplay attempt after user gesture: startMusic when Start Journey clicked
+    document.getElementById('startJourney').addEventListener('click', async () => {
+      document.getElementById('message').scrollIntoView({behavior:'smooth'});
+      confettiSmall();
+      try { await bgAudio.play(); playPauseBtn.innerText = 'Pause music'; musicPlaying = true; } catch(e){}
+    });
+
+    // --- Confetti helpers ---
+    function confettiSmall(){
+      confetti({ particleCount: 80, spread: 60, origin: { y: 0.2 }, colors: ['#ff78b6','#ffdbe9','#ffe7f2','#ffffff'] });
+    }
+    function confettiBig(){
+      confetti({ particleCount: 350, spread: 160, gravity: 0.9, origin: { y: 0.3 }, colors: ['#ff6fb1','#ffd6ea','#fff2f8','#ffffff','#000000'] });
+    }
+    document.getElementById('finalConfetti').addEventListener('click', () => { confettiBig(); for(let i=0;i<14;i++){ spawnFloatingHeart(window.innerWidth/2 + (Math.random()*400-200), window.innerHeight/2 + (Math.random()*200-100)); } });
+
+    // floating hearts on clicks
+    function spawnFloatingHeart(x,y){
+      const h = document.createElement('div'); h.className = 'floating-heart'; h.style.left = (x-16)+'px'; h.style.top = (y-16)+'px'; h.innerHTML = '💗'; document.body.appendChild(h);
+      setTimeout(()=> h.remove(), 3200);
+    }
+    document.body.addEventListener('click', (e) => {
+      if (e.target.closest('button') || e.target.closest('a') || e.target.closest('input')) return;
+      spawnFloatingHeart(e.clientX, e.clientY);
+    });
+
+    // --- Custom cursor ---
+    const cursor = document.getElementById('cursor'), follower = document.getElementById('cursorFollower');
+    document.addEventListener('mousemove', (e) => {
+      cursor.style.left = e.clientX + 'px'; cursor.style.top = e.clientY + 'px';
+      follower.style.left = (e.clientX + 12) + 'px'; follower.style.top = (e.clientY + 12) + 'px';
+    });
+    // enlarge cursor for interactive elements
+    document.querySelectorAll('button, a, .gallery img, .video-thumb').forEach(el => {
+      el.addEventListener('mouseenter', ()=> { cursor.style.transform = 'scale(1.6)'; follower.style.transform = 'scale(1.2)'; });
+      el.addEventListener('mouseleave', ()=> { cursor.style.transform = 'scale(1)'; follower.style.transform = 'scale(1)'; });
+    });
+
+    // --- Smooth nav scrolling ---
+    document.querySelectorAll('a[data-scroll]').forEach(a => {
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        const id = a.getAttribute('href'); const el = document.querySelector(id);
+        if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+      });
+    });
+
+    // --- Performance advice printed to console ---
+    console.log("⚡ Optimization tips: resize iPhone originals (4032x3024) to 1920px wide for slideshow and 1024px for gallery thumbnails. Use webp if possible. Lazy-load heavy assets for faster initial paint.");
+
+    // End
+  </script>
+</body>
+</html>
